@@ -1,18 +1,15 @@
 import tkinter as tk
 import random
-import tkinter.font as tkFont
 from tkinter import messagebox
-import time  # Required for timer
 
 # Initialize variables
 score = 0
 current_question = ""
 correct_answer = ""
-difficulty = "easy"  # Default difficulty
-time_limit = 20  # Default time limit in seconds
-timer = None
+difficulty = "easy"
+time_limit = 20
 question_number = 0
-math_coins = 0  # Introduce virtual currency
+math_coins = 0
 
 # Define upgrades and their properties
 upgrades = [
@@ -21,29 +18,14 @@ upgrades = [
     {"name": "Upgrade 3", "cost": 150, "effect": 30}
 ]
 
-# Questions and answers database (for easy, medium, and hard levels)
-easy_questions = [
-    "What is 5 + 3?",
-    "What is 7 * 4?",
-    "What is 12 / 3?"
-]
-
+# Questions and answers database
+easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?"]
 easy_answers = ["8", "28", "4"]
 
-medium_questions = [
-    "What is 15 - 7?",
-    "What is 6 * 9?",
-    "What is 25 / 5?"
-]
-
+medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?"]
 medium_answers = ["8", "54", "5"]
 
-hard_questions = [
-    "What is the square root of 144?",
-    "What is 12^3?",
-    "What is 10! (factorial)?"
-]
-
+hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?"]
 hard_answers = ["12", "1728", "3628800"]
 
 # Function to initialize a new quiz session
@@ -54,8 +36,7 @@ def start_quiz(selected_difficulty):
     question_number = 0
     select_question()
     update_score()
-    update_math_coins()  # Initialize MathCoins display
-    update_progress()
+    update_math_coins()
     start_timer()
 
 # Function to start a new quiz question
@@ -79,15 +60,14 @@ def check_answer():
     if user_answer == correct_answer:
         feedback_label.config(text="Correct!", fg="green")
         score += 1
-        # Reward MathCoins for correct answers
-        math_coins += 5  # Adjust the amount as needed
+        math_coins += 5
         update_score()
         update_math_coins()
     else:
         feedback_label.config(text="Incorrect. Correct answer: " + correct_answer, fg="red")
 
     question_number += 1
-    if question_number < 5:  # Adjust the number of questions per quiz
+    if question_number < 5:
         select_question()
         update_score()
         entry_answer.delete(0, tk.END)
@@ -115,6 +95,22 @@ def update_math_coins():
     math_coins_label.config(text="MathCoins: " + str(math_coins))
 
 # Function to start the timer
+def start_timer():
+    global time_limit, timer
+    time_left = tk.StringVar()
+    time_left.set(time_limit)
+    timer_label.config(textvariable=time_left)
+
+    def countdown():
+        global time_limit
+        if time_limit > 0:
+            time_limit -= 1
+            time_left.set(time_limit)
+            timer = root.after(1000, countdown)
+        else:
+            end_quiz()
+
+    countdown()
 
 # Function to provide a hint
 def give_hint():
@@ -128,22 +124,6 @@ def give_hint():
 
     messagebox.showinfo("Hint", hint_text)
 
-# Function to buy upgrades
-def buy_upgrade():
-    global math_coins, score
-    selected_upgrade = random.choice(upgrades)  # Select a random upgrade
-    upgrade_cost = selected_upgrade["cost"]
-    upgrade_effect = selected_upgrade["effect"]
-
-    if math_coins >= upgrade_cost:
-        math_coins -= upgrade_cost
-        score += upgrade_effect  # Apply the upgrade's effect
-        update_score()
-        update_math_coins()
-        messagebox.showinfo("Upgrade Purchased", f"Purchased {selected_upgrade['name']} for {upgrade_cost} MathCoins.")
-    else:
-        messagebox.showerror("Insufficient MathCoins", "You don't have enough MathCoins to purchase this upgrade.")
-
 # Function to change the difficulty level
 def change_difficulty():
     global difficulty
@@ -156,29 +136,38 @@ root = tk.Tk()
 root.title("Math Tycoon Game")
 
 # Set the window size
+window_width = 800
+window_height = 600
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x_coordinate = (screen_width - window_width) // 2
+y_coordinate = (screen_height - window_height) // 2
+root.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
-
-# Create GUI components with adjusted fonts and positions
-
-
-# Create a font object for the difficulty menu
-menu_font = tkFont.Font(family="Arial", size=18)
-
-# Create the difficulty menu
-
-
-# Create a button to change difficulty
+# Create GUI components
+question_label = tk.Label(root, text="", font=("Arial", 24))
+entry_answer = tk.Entry(root, font=("Arial", 20))
+submit_button = tk.Button(root, text="Submit Answer", command=check_answer, font=("Arial", 18))
+feedback_label = tk.Label(root, text="", fg="black", font=("Arial", 18))
+score_label = tk.Label(root, text="Score: 0", font=("Arial", 20))
+timer_label = tk.Label(root, text="Time Left: 0", font=("Arial", 20))
+start_button = tk.Button(root, text="Start Quiz", command=lambda: start_quiz(difficulty_var.get()), font=("Arial", 18))
+leaderboard_button = tk.Button(root, text="View Leaderboard", state="disabled", font=("Arial", 18))
+hints_button = tk.Button(root, text="Get Hint", command=give_hint, state="disabled", font=("Arial", 18))
+difficulty_var = tk.StringVar(value="easy")
+difficulty_menu = tk.OptionMenu(root, difficulty_var, "easy", "medium", "hard")
 change_difficulty_button = tk.Button(root, text="Change Difficulty", command=change_difficulty, font=("Arial", 18))
-change_difficulty_button.pack()
-
-# Initialize MathCoins label
 math_coins_label = tk.Label(root, text="MathCoins: 0", font=("Arial", 20))
 
-# Add the components to the GUI
+# Add components to the GUI
+difficulty_label = tk.Label(root, text="Selected Difficulty: Easy", font=("Arial", 20))
+difficulty_menu.config(font=("Arial", 18))
+difficulty_menu.pack()
+change_difficulty_button.pack()
 difficulty_label.pack()
 start_button.pack()
 score_label.pack()
-math_coins_label.pack()  # Display MathCoins
+math_coins_label.pack()
 timer_label.pack()
 question_label.pack(pady=20)
 entry_answer.pack()
@@ -187,8 +176,6 @@ hints_button.pack()
 feedback_label.pack()
 leaderboard_button.pack()
 
-# Load sound files for correct and incorrect answers
-# Place "correct.wav" and "incorrect.wav" in the same directory as your script
-
 # Start the Tkinter event loop
 root.mainloop()
+
