@@ -1,69 +1,101 @@
-import tkinter as tk 
+import tkinter as tk
+import random
+import tkinter.font as tkFont
+from tkinter import messagebox
+import time  # Required for timer
+
+# Initialize variables
+score = 0
+current_question = ""
+correct_answer = ""
+difficulty = "easy"  # Default difficulty
+time_limit = 20  # Default time limit in seconds
+timer = None
+question_number = 0
+math_coins = 0  # Introduce virtual currency
+
+# Define upgrades and their properties
+
+
+# Questions and answers database (for easy, medium, and hard levels)
+
+
+# Function to initialize a new quiz session
+
+
+# Function to start a new quiz question
+
+
+# Function to check the user's answer and earn MathCoins
+
+        # Reward MathCoins for correct answers
+
+# Function to end the quiz and display earned MathCoins
+
+
+# Function to update the player's score
+
+
+# Function to update MathCoins display
+
+
+# Function to start the timer
 
 
 
-#custom funtions
-def draw():
-    x1 = int(txtX1.get())
-    y1 = int(txtY1.get())
-    x2 = int(txtX2.get())
-    y2 = int(txtY2.get())
-    Canvas.create_line(x1,y1,x2,y2)
+# Function to provide a hint
 
 
-def clear():
-    Canvas.delete('all')
+    messagebox.showinfo("Hint", hint_text)
+
+# Function to buy upgrades
 
 
-
-#window propeties   
-window = tk.Tk()
-window.title("Grahping with Tkinter")
-window.geometry("800x800")
+# Function to change the difficulty level
 
 
+# Create the main window
+root = tk.Tk()
+root.title("Math Tycoon Game")
+
+# Set the window size
 
 
-#creat labels 
-lblX1 = tk.Label(window, text="X1: ")
-lblY1 = tk.Label(window, text="Y1: ")
-lblX2 = tk.Label(window, text="X2: ")
-lblY2 = tk.Label(window, text="Y2: ")
+# Create GUI components with adjusted fonts and positions
+
+difficulty_var = tk.StringVar(value="easy")
+
+# Create a font object for the difficulty menu
 
 
+# Create the difficulty menu
+  # Add the difficulty menu to the GUI
+
+# Create a button to change difficulty
 
 
-#create textboxes
-txtX1 = tk.Entry(window)
-txtY1 = tk.Entry(window)
-txtX2 = tk.Entry(window)
-txtY2 = tk.Entry(window)
+# Initialize MathCoins label
 
 
-#buttons
-btn = tk.Button(window, text="draw!", padx=20, command=draw)
-btnClear = tk.Button(window,text="clear", padx=20,command=clear)
+# Add the components to the GUI
+difficulty_label.pack()
+start_button.pack()
+score_label.pack()
+math_coins_label.pack()  # Display MathCoins
+timer_label.pack()
+question_label.pack(pady=20)
+entry_answer.pack()
+submit_button.pack()
+hints_button.pack()
+feedback_label.pack()
+leaderboard_button.pack()
+
+# Load sound files for correct and incorrect answers
+# Place "correct.wav" and "incorrect.wav" in the same directory as your script
+
+# Start the Tkinter event loop
+root.mainloop()
 
 
-#canvases
-Canvas = tk.Canvas(window)
-
-
-#add GUI item to the grid
-lblX1.grid(row=0, column =0)
-lblY1.grid(row=1, column =0)
-lblX2.grid(row=2, column =0)
-lblY2.grid(row=3, column =0)
-txtX1.grid(row=0, column =1)
-txtY1.grid(row=1, column =1)
-txtX2.grid(row=2, column =1)
-txtY2.grid(row=3, column =1)
-btn.grid(row=3, column = 3)
-btnClear.grid(row=3, column = 4)
-Canvas.grid(row=4, column=0)
-
-
-#build window 
-window.mainloop()
 
 
