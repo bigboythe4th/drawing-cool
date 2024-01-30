@@ -1,5 +1,7 @@
 
-![] (images/Markdown/1_L76A5gL6176UbMgn7q4Ybg-copy.jpg)
+![](images/Markdown/1_L76A5gL6176UbMgn7q4Ybg-copy.jpg)
+
+
 
 
 #Math Tycoon Game
