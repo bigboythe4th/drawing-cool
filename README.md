@@ -1,7 +1,6 @@
 
-![](images/Markdown/1_L76A5gL6176UbMgn7q4Ybg-copy.jpg)
 
-
+![image](https://github.com/bigboythe4th/drawing-cool/assets/114013954/e3c1408c-27e3-4ac9-880a-9a05c71389c4)
 
 
 #Math Tycoon Game
