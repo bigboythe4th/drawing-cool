@@ -1,4 +1,7 @@
 
+![] (images/Markdown/1_L76A5gL6176UbMgn7q4Ybg-copy.jpg)
+
+
 #Math Tycoon Game
 Hello and welcome to the Math Tycoon Game! This educational game is designed to test your math skills and provide an enjoyable challenge with various math questions. Your goal is to achieve a maximum score of 4 by answering all 4 questions correctly. This README contains instructions on how to play the game and additional information to enhance your gaming experience.
 
