@@ -4,21 +4,21 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-# Initialize variables
+# start variables
 score, current_question, correct_answer, difficulty, time_limit, question_number = 0, "", "", "easy", 20, 0
 math_coins, correct_answers_count, incorrect_answers_count = 0, 0, 0
 
 # Questions and answers database
-easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?"]
-easy_answers = ["8", "28", "4"]
+easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?", "What is 16 / 2?", "What is 1 + 3?"]
+easy_answers = ["8", "28", "4" , "8", "4"]
 
-medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?"]
-medium_answers = ["8", "54", "5"]
+medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?", "What is 245 + 543?"]
+medium_answers = ["8", "54", "5", "788"]
 
 hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?"]
 hard_answers = ["12", "1728", "3628800"]
 
-# Function to initialize a new quiz session
+# Function to start a new quiz 
 def start_quiz(selected_difficulty):
     global score, current_question, correct_answer, difficulty, time_limit, question_number, correct_answers_count, incorrect_answers_count
     score, difficulty, question_number, correct_answers_count, incorrect_answers_count = 0, selected_difficulty, 0, 0, 0
@@ -57,7 +57,7 @@ def check_answer():
     else:
         end_quiz()
 
-# Function to end the quiz and display earned MathCoins
+# Function to end the quiz and show earned MathCoins
 def end_quiz():
     global timer
     if timer:
@@ -67,11 +67,11 @@ def end_quiz():
     submit_button.config(state="disabled")
     start_button.config(state="normal")
 
-# Function to update the player's score
+# Function to update the players score
 def update_score():
     score_label.config(text="Score: " + str(score))
 
-# Function to update MathCoins display
+# Function to update MathCoins screan
 def update_math_coins():
     math_coins_label.config(text="MathCoins: " + str(math_coins))
 
@@ -100,12 +100,12 @@ def change_difficulty():
     select_question()
     difficulty_label.config(text="Selected Difficulty: " + difficulty.capitalize())
 
-# Function to plot a bar graph showing correct and incorrect answers
+# Function to show a bar graph showing correct and incorrect answers
 def plot_bar_graph():
     global ax, canvas
     labels, counts, colors = ["Correct", "Incorrect"], [correct_answers_count, incorrect_answers_count], ['green', 'red']
 
-    # Clear previous graph
+    # Clear the last graph
     ax.clear()
     ax.bar(labels, counts, color=colors)
     ax.set_xlabel("Answer Status")
@@ -123,7 +123,7 @@ screen_width, screen_height = root.winfo_screenwidth(), root.winfo_screenheight(
 x_coordinate, y_coordinate = (screen_width - window_width) // 2, (screen_height - window_height) // 2
 root.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
-# Create GUI components
+# Create GUI 
 question_label = tk.Label(root, text="", font=("Arial", 24))
 entry_answer = tk.Entry(root, font=("Arial", 20))
 submit_button = tk.Button(root, text="Submit Answer", command=check_answer, font=("Arial", 18))
@@ -136,7 +136,7 @@ difficulty_menu = tk.OptionMenu(root, difficulty_var, "easy", "medium", "hard")
 change_difficulty_button = tk.Button(root, text="Change Difficulty", command=change_difficulty, font=("Arial", 18))
 math_coins_label = tk.Label(root, text="MathCoins: 0", font=("Arial", 20))
 
-# Add components to the GUI
+# Add parts to the GUI
 difficulty_label = tk.Label(root, text="Selected Difficulty: Easy", font=("Arial", 20))
 difficulty_menu.config(font=("Arial", 18))
 difficulty_menu.pack()
