@@ -15,8 +15,8 @@ easy_answers = ["8", "28", "4" , "8", "4"]
 medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?", "What is 245 + 543?"]
 medium_answers = ["8", "54", "5", "788"]
 
-hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?"]
-hard_answers = ["12", "1728", "3628800"]
+hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?", "What is 2^9?",]
+hard_answers = ["12", "1728", "3628800","512"]
 
 # Function to start a new quiz 
 def start_quiz(selected_difficulty):
