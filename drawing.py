@@ -2,15 +2,15 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  #importanting varible used for gui to plot graphs
 
 # start variables
 score, current_question, correct_answer, difficulty, time_limit, question_number = 0, "", "", "easy", 20, 0
 math_coins, correct_answers_count, incorrect_answers_count = 0, 0, 0
 
 # Questions and answers database
-easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?", "What is 16 / 2?", "What is 1 + 3?"]
-easy_answers = ["8", "28", "4" , "8", "4"]
+easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?", "What is 16 / 2?", "What is 1 + 3?", "What is 10 + 30?"  ]
+easy_answers = ["8", "28", "4" , "8", "4", "40"]
 
 medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?", "What is 245 + 543?", "What is 7.4 * .75?"]
 medium_answers = ["8", "54", "5", "788", "5.55"]
@@ -62,7 +62,7 @@ def end_quiz():
     global timer
     if timer:
         root.after_cancel(timer)
-    messagebox.showinfo("Quiz Completed", f"Quiz completed!\nYour Score: {score}\nMathCoins Earned: {math_coins}") #used to shorten code {} a f string instead 
+    messagebox.showinfo("Quiz Completed", f"Quiz completed!\nYour Score: {score}\nMathCoins Earned: {math_coins}") #used to shorten code {} a f string 
     entry_answer.config(state="disabled")
     submit_button.config(state="disabled")
     start_button.config(state="normal")
@@ -130,7 +130,7 @@ submit_button = tk.Button(root, text="Submit Answer", command=check_answer, font
 feedback_label = tk.Label(root, text="", fg="black", font=("Arial", 18))
 score_label = tk.Label(root, text="Score: 0", font=("Arial", 20))
 timer_label = tk.Label(root, text="Time Left: 0", font=("Arial", 20))
-start_button = tk.Button(root, text="Start Quiz", command=lambda: start_quiz(difficulty_var.get()), font=("Arial", 18))
+start_button = tk.Button(root, text="Start Quiz", command=lambda: start_quiz(difficulty_var.get()), font=("Arial", 18))   #lambda is used to define functions in 1 line of code and can not realy be called
 difficulty_var = tk.StringVar(value="easy")
 difficulty_menu = tk.OptionMenu(root, difficulty_var, "easy", "medium", "hard")
 change_difficulty_button = tk.Button(root, text="Change Difficulty", command=change_difficulty, font=("Arial", 18))
