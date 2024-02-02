@@ -12,11 +12,11 @@ math_coins, correct_answers_count, incorrect_answers_count = 0, 0, 0
 easy_questions = ["What is 5 + 3?", "What is 7 * 4?", "What is 12 / 3?", "What is 16 / 2?", "What is 1 + 3?"]
 easy_answers = ["8", "28", "4" , "8", "4"]
 
-medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?", "What is 245 + 543?"]
-medium_answers = ["8", "54", "5", "788"]
+medium_questions = ["What is 15 - 7?", "What is 6 * 9?", "What is 25 / 5?", "What is 245 + 543?", "What is 7.4 * .75?"]
+medium_answers = ["8", "54", "5", "788", "5.55"]
 
-hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?", "What is 2^9?",]
-hard_answers = ["12", "1728", "3628800","512"]
+hard_questions = ["What is the square root of 144?", "What is 12^3?", "What is 10! (factorial)?", "What is 2^9?", "What is 9.5*80?",]
+hard_answers = ["12", "1728", "3628800","256", "760"]
 
 # Function to start a new quiz 
 def start_quiz(selected_difficulty):
@@ -62,7 +62,7 @@ def end_quiz():
     global timer
     if timer:
         root.after_cancel(timer)
-    messagebox.showinfo("Quiz Completed", f"Quiz completed!\nYour Score: {score}\nMathCoins Earned: {math_coins}")
+    messagebox.showinfo("Quiz Completed", f"Quiz completed!\nYour Score: {score}\nMathCoins Earned: {math_coins}") #used to shorten code {} a f string instead 
     entry_answer.config(state="disabled")
     submit_button.config(state="disabled")
     start_button.config(state="normal")
@@ -121,7 +121,7 @@ root.title("Math Tycoon Game")
 window_width, window_height = 800, 600
 screen_width, screen_height = root.winfo_screenwidth(), root.winfo_screenheight()
 x_coordinate, y_coordinate = (screen_width - window_width) // 2, (screen_height - window_height) // 2
-root.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
+root.geometry(str(window_width) + "x" + str(window_height) + "+" + str(x_coordinate) + "+" + str(y_coordinate))
 
 # Create GUI 
 question_label = tk.Label(root, text="", font=("Arial", 24))
